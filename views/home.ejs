@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Hey from the Server</h1>
+    <% urls.forEach(url => { %>
+        <li><%= url.shortid %></li>
+       <%}) %>
+        <button type="submit">Generate</button>
+    </form>
+    <div>
+        <% if (urls && urls.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Short ID</th>
+                        <th>Redirect</th>
+                        <th>Visits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><a href="/<%= url.shortId %>"><%= url.shortId %></a></td>
+                            <td><a href="<%= url.redirectURL %>" target="_blank" rel="noopener noreferrer"><%= url.redirectURL %></a></td>
+                            <td><%= (url.visitHistory || []).length %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No URLs found.</p>
+        <% } %>
+        </div>
+</body>
+</html>
